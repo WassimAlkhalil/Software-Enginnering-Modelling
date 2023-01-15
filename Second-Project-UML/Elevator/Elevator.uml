@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_hJTc4OJnEeyHBJygGKb17w" name="Elevator">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_hM5jcOJnEeyHBJygGKb17w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rIebwOJnEeyHBJygGKb17w" name="Controller">
+    <ownedRule xmi:type="uml:Constraint" xmi:id="_ddiGcPCkEeyMo6X40rk_ow" name="JustOneController">
+      <specification xmi:type="uml:OpaqueExpression" xmi:id="_deAAgPCkEeyMo6X40rk_ow" name="constraintSpec">
+        <language>OCL</language>
+        <body>1 = Controller.allInstances()->size()</body>
+      </specification>
+    </ownedRule>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="_hlsJkPGfEeymb_gg-lPi_g" name="AllElevatorsInRange">
+      <specification xmi:type="uml:OpaqueExpression" xmi:id="_hltXsPGfEeymb_gg-lPi_g" name="constraintSpec">
+        <language>OCL</language>
+        <body>true = Elevator.allInstances()->forAll(e| ((e.z / self.deltaZ)  - (e.z / self.deltaZ ).round()).abs() &lt; 0.1)</body>
+      </specification>
+    </ownedRule>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_tq58QOJnEeyHBJygGKb17w" name="deltaT">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_uxr-IOJnEeyHBJygGKb17w" name="deltaZ">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_4oUFAOJnEeyHBJygGKb17w" name="control"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wECjEO15EeyNHuxyM-VrdA" name="Elevator" visibility="package">
+    <ownedRule xmi:type="uml:Constraint" xmi:id="_8i-3wO3AEey98IwdPblAAw" name="beepingConstraint">
+      <specification xmi:type="uml:OpaqueExpression" xmi:id="_8i-3we3AEey98IwdPblAAw" name="constraintSpec">
+        <language>OCL</language>
+        <body>self.beeping = (self.person->iterate( e; acc:Real=0.0 | acc+e.weight) > self.maxLoad)</body>
+      </specification>
+    </ownedRule>
+    <generalization xmi:type="uml:Generalization" xmi:id="_DQJl0PCfEeyxqY7Bi3yCzA" general="_QYd3QO17EeyNHuxyM-VrdA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_7wT88O15EeyNHuxyM-VrdA" name="v">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_JkuvEO16EeyNHuxyM-VrdA" name="direction" type="_X0h1oO16EeyNHuxyM-VrdA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_QnzsEO2BEeyNHuxyM-VrdA" name="brake">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_1H9v8O15EeyNHuxyM-VrdA" name="z">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_E6RyIO16EeyNHuxyM-VrdA" name="beeping">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="__Oc3wO15EeyNHuxyM-VrdA" name="maxLoad">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_X0h1oO16EeyNHuxyM-VrdA" name="Direction" visibility="package">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_oIlS8O16EeyNHuxyM-VrdA" name="idle"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_5ER_EO16EeyNHuxyM-VrdA" name="up"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_6AmdYO16EeyNHuxyM-VrdA" name="down"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_8ly-AO16EeyNHuxyM-VrdA" name="DoorsCommand" visibility="package">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="__JSOcO16EeyNHuxyM-VrdA" name="close"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_AJWkUO17EeyNHuxyM-VrdA" name="open"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_BP58sO17EeyNHuxyM-VrdA" name="DoorsState" visibility="package">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_DZopUO17EeyNHuxyM-VrdA" name="closed"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_EwQeAO17EeyNHuxyM-VrdA" name="closing"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_F6SoMO17EeyNHuxyM-VrdA" name="open"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_HYN-wO17EeyNHuxyM-VrdA" name="opening"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JeBNoO17EeyNHuxyM-VrdA" name="Person">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_KVck4O17EeyNHuxyM-VrdA" name="weight" visibility="package">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_QYd3QO17EeyNHuxyM-VrdA" name="Location" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_TUrz8O1_EeyNHuxyM-VrdA" name="person" type="_JeBNoO17EeyNHuxyM-VrdA" aggregation="shared" association="_TUoJkO1_EeyNHuxyM-VrdA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_chcecO1_EeyNHuxyM-VrdA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ch2HEO1_EeyNHuxyM-VrdA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_S3yZYO17EeyNHuxyM-VrdA" name="Floor">
+    <generalization xmi:type="uml:Generalization" xmi:id="_BmPowPCfEeyxqY7Bi3yCzA" general="_QYd3QO17EeyNHuxyM-VrdA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_IwJ6sO1-EeyNHuxyM-VrdA" name="height">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Jb7Q8PCyEeyPk6Jvl_OZvw" name="z">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_zlFHQO2BEeyNHuxyM-VrdA" name="abovePlus" bodyCondition="_7FwooO28Eey98IwdPblAAw" isQuery="true">
+      <ownedRule xmi:type="uml:Constraint" xmi:id="_7FwooO28Eey98IwdPblAAw" name="abovePlusConstraint">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_F6YzYO2-Eey98IwdPblAAw" name="abovePlusBodyExpr">
+          <language>OCL</language>
+          <body>if (self.above->notEmpty()) then Set{self.above}->union(self.above.abovePlus()) else Set{} endif</body>
+        </specification>
+      </ownedRule>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_ywXQUO2CEeyNHuxyM-VrdA" type="_S3yZYO17EeyNHuxyM-VrdA" direction="return" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UQqvsO2uEeyV9Ioe9NuO3A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8_XW8O2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_H64GQO2DEeyNHuxyM-VrdA" name="belowPlus" bodyCondition="_5BhEQPDCEeyPk6Jvl_OZvw" isQuery="true">
+      <ownedRule xmi:type="uml:Constraint" xmi:id="_5BhEQPDCEeyPk6Jvl_OZvw" name="belowPlusConstrBody">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_5BhEQfDCEeyPk6Jvl_OZvw" name="belowPlusExpr">
+          <language>OCL</language>
+          <body>if (self.below->notEmpty()) then Set{self.below}->union(self.below.belowPlus()) else Set{} endif</body>
+        </specification>
+      </ownedRule>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_4wI9cO2uEeyV9Ioe9NuO3A" type="_S3yZYO17EeyNHuxyM-VrdA" direction="return" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-s520O2uEeyV9Ioe9NuO3A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-ZRwMO2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_OhRygO2DEeyNHuxyM-VrdA" name="abovePlusAux" bodyCondition="_132-8PCyEeyPk6Jvl_OZvw" isQuery="true">
+      <ownedRule xmi:type="uml:Constraint" xmi:id="_132-8PCyEeyPk6Jvl_OZvw" name="abovePlusAuxBodyConstr">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_132-8fCyEeyPk6Jvl_OZvw" name="abovePlusAuxBodyExpr">
+          <language>OCL</language>
+          <body>if (s->isEmpty()) then Set{} else s->collect(f: Floor|f.abovePlus())->flatten()->asSet() endif</body>
+        </specification>
+      </ownedRule>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_OhRyge2DEeyNHuxyM-VrdA" name="s" type="_S3yZYO17EeyNHuxyM-VrdA" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9VAl0PDaEeyPk6Jvl_OZvw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dTbwsO2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dtgFEO2DEeyNHuxyM-VrdA" type="_S3yZYO17EeyNHuxyM-VrdA" direction="return" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bAVFoO2uEeyV9Ioe9NuO3A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bUv2cO2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_URHDIO2DEeyNHuxyM-VrdA" name="belowPlusAux" bodyCondition="_LWc-wPDEEeyPk6Jvl_OZvw" isQuery="true">
+      <ownedRule xmi:type="uml:Constraint" xmi:id="_LWc-wPDEEeyPk6Jvl_OZvw" name="belowPlusAuxBodyConstr">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_LWc-wfDEEeyPk6Jvl_OZvw" name="belowPlusAuxBodyExp">
+          <language>OCL</language>
+          <body>if (s->isEmpty()) then Set{} else s->collect(f| f.belowPlus())->flatten()->asSet() endif</body>
+        </specification>
+      </ownedRule>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_URHDIe2DEeyNHuxyM-VrdA" name="s" type="_S3yZYO17EeyNHuxyM-VrdA" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nsSa4O2uEeyV9Ioe9NuO3A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nsbk0O2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bYlcIO2DEeyNHuxyM-VrdA" type="_S3yZYO17EeyNHuxyM-VrdA" direction="return" effect="read">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rWajQO2uEeyV9Ioe9NuO3A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rAvOMO2uEeyV9Ioe9NuO3A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_TUoJkO1_EeyNHuxyM-VrdA" name="CurrentLocation" memberEnd="_TUql0O1_EeyNHuxyM-VrdA _TUrz8O1_EeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_TUpXsO1_EeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_TUp-wO1_EeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_TUql0O1_EeyNHuxyM-VrdA" name="location" type="_QYd3QO17EeyNHuxyM-VrdA" association="_TUoJkO1_EeyNHuxyM-VrdA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_hoJSgO1_EeyNHuxyM-VrdA" name="FloorOrder" visibility="public" memberEnd="_hoJ5ku1_EeyNHuxyM-VrdA _hoJ5k-1_EeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hoJ5kO1_EeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hoJ5ke1_EeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_hoJ5ku1_EeyNHuxyM-VrdA" name="above" type="_S3yZYO17EeyNHuxyM-VrdA" association="_hoJSgO1_EeyNHuxyM-VrdA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qIrwMO1_EeyNHuxyM-VrdA"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_hoJ5k-1_EeyNHuxyM-VrdA" name="below" type="_S3yZYO17EeyNHuxyM-VrdA" association="_hoJSgO1_EeyNHuxyM-VrdA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qkcfIO1_EeyNHuxyM-VrdA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:AssociationClass" xmi:id="_0tl5YO1_EeyNHuxyM-VrdA" name="Doors" memberEnd="_0tnHgu1_EeyNHuxyM-VrdA _0tnukO1_EeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0tnHgO1_EeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_0tnHge1_EeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_6BbKgO1_EeyNHuxyM-VrdA" name="state" type="_BP58sO17EeyNHuxyM-VrdA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Asi-sO2AEeyNHuxyM-VrdA" name="command" type="_8ly-AO16EeyNHuxyM-VrdA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_0tnukO1_EeyNHuxyM-VrdA" name="elevator" type="_wECjEO15EeyNHuxyM-VrdA" association="_0tl5YO1_EeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w-kKMPCxEeyPk6Jvl_OZvw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_0tnHgu1_EeyNHuxyM-VrdA" name="floor" type="_S3yZYO17EeyNHuxyM-VrdA" association="_0tl5YO1_EeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JbKUoO2AEeyNHuxyM-VrdA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:AssociationClass" xmi:id="_Z1NFMO2AEeyNHuxyM-VrdA" name="FloorButton" visibility="public" memberEnd="_Z1O6Yu2AEeyNHuxyM-VrdA _Z1PhcO2AEeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Z1O6YO2AEeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Z1O6Ye2AEeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_l-P6oO2AEeyNHuxyM-VrdA" name="pressed">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Z1PhcO2AEeyNHuxyM-VrdA" name="destFloor" type="_S3yZYO17EeyNHuxyM-VrdA" association="_Z1NFMO2AEeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DSp_4PCiEeyziqEMC9Dd8A" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Z1O6Yu2AEeyNHuxyM-VrdA" name="inElevator" type="_wECjEO15EeyNHuxyM-VrdA" association="_Z1NFMO2AEeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__FDXAPChEeyziqEMC9Dd8A" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:AssociationClass" xmi:id="_vDwtoO2AEeyNHuxyM-VrdA" name="DownButton" memberEnd="_vDx7wO2AEeyNHuxyM-VrdA _vDyi0O2AEeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_vDxUsO2AEeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_vDxUse2AEeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_6-okMO2AEeyNHuxyM-VrdA" name="pressed">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_vDx7wO2AEeyNHuxyM-VrdA" name="downOnFloor" type="_S3yZYO17EeyNHuxyM-VrdA" association="_vDwtoO2AEeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2i1HQO2AEeyNHuxyM-VrdA" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_vDyi0O2AEeyNHuxyM-VrdA" name="downToElevator" type="_wECjEO15EeyNHuxyM-VrdA" association="_vDwtoO2AEeyNHuxyM-VrdA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3tzsoO2AEeyNHuxyM-VrdA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3uBIAO2AEeyNHuxyM-VrdA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:AssociationClass" xmi:id="_-myWoO2AEeyNHuxyM-VrdA" name="UpButton" memberEnd="_-mzkwu2AEeyNHuxyM-VrdA _-m0L0O2AEeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-mzkwO2AEeyNHuxyM-VrdA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-mzkwe2AEeyNHuxyM-VrdA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_HsxawPCiEeyziqEMC9Dd8A" name="pressed" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_-mzkwu2AEeyNHuxyM-VrdA" name="upOnFloor" type="_S3yZYO17EeyNHuxyM-VrdA" association="_-myWoO2AEeyNHuxyM-VrdA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GSp2IO2BEeyNHuxyM-VrdA" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_-m0L0O2AEeyNHuxyM-VrdA" name="upToElevator" type="_wECjEO15EeyNHuxyM-VrdA" association="_-myWoO2AEeyNHuxyM-VrdA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GAPQcO2BEeyNHuxyM-VrdA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GAnD4O2BEeyNHuxyM-VrdA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_hMO1EOJnEeyHBJygGKb17w">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_hMPcIOJnEeyHBJygGKb17w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/ocl/2015/OCLforUML/1#/"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://OCL_PROFILES/OCLforUML.profile.uml#_0"/>
+  </profileApplication>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_KFcE4O15EeyNHuxyM-VrdA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KFehIO15EeyNHuxyM-VrdA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+  </profileApplication>
+</uml:Model>
